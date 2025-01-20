@@ -3,19 +3,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.3.5</version>
-    <relativePath /> <!-- lookup parent from repository -->
+    <groupId>link</groupId>
+    <artifactId>link-parent</artifactId>
+    <version>3.3.7-SNAPSHOT</version>
   </parent>
+
   <groupId>link</groupId>
   <artifactId>link-wecom</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>${revision}</version>
   <packaging>pom</packaging>
   <name>link-wecom</name>
   <modules>
     <module>example</module>
     <module>wecom-base</module>
+    <module>wecom-msg-audit</module>
   </modules>
   <properties>
 
@@ -23,7 +24,7 @@
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <link.version>3.3.5-SNAPSHOT</link.version>
+    <revision>1.0.0-SNAPSHOT</revision>
 
     <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
     <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
@@ -34,20 +35,18 @@
     <dependencies>
       <dependency>
         <groupId>link</groupId>
-        <artifactId>link-parent</artifactId>
-        <version>${link.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
+        <artifactId>wecom-base</artifactId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <groupId>link</groupId>
+        <artifactId>wecom-msg-audit</artifactId>
+        <version>${revision}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
-    <dependency>
-      <groupId>link</groupId>
-      <artifactId>link-common</artifactId>
-      <scope>provided</scope>
-    </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -57,35 +56,6 @@
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>flatten-maven-plugin</artifactId>
-        <version>${flatten-maven-plugin.version}</version>
-        <configuration>
-          <flattenMode>oss</flattenMode>
-          <updatePomFile>true</updatePomFile>
-          <pomElements>
-            <dependencyManagement>keep</dependencyManagement>
-            <properties>keep</properties>
-          </pomElements>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>flatten</goal>
-            </goals>
-            <id>flatten</id>
-            <phase>process-resources</phase>
-          </execution>
-          <execution>
-            <goals>
-              <goal>clean</goal>
-            </goals>
-            <id>flatten.clean</id>
-            <phase>clean</phase>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>

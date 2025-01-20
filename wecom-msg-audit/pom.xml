@@ -9,7 +9,7 @@
     <version>${revision}</version>
   </parent>
 
-  <artifactId>wecom-base</artifactId>
+  <artifactId>wecom-msg-audit</artifactId>
 
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
@@ -20,15 +20,7 @@
   <dependencies>
     <dependency>
       <groupId>link</groupId>
-      <artifactId>link-common</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>link</groupId>
-      <artifactId>link-redis-cache-starter</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>link</groupId>
-      <artifactId>link-redisson-starter</artifactId>
+      <artifactId>wecom-base</artifactId>
     </dependency>
   </dependencies>
 </project>
