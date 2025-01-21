@@ -1,6 +1,6 @@
 package link.wecom.msg.audit.service;
 
-import link.wecom.base.service.AgentTokenService;
+import link.wecom.agent.service.AgentTokenService;
 import link.wecom.msg.audit.MsgAuditProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package link.wecom.base.manager;
+package link.wecom.agent.manager;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import link.wecom.base.domain.BaseResponse;

@@ -1,4 +1,4 @@
-package link.wecom.base.manager;
+package link.wecom.agent.manager;
 
 import link.common.utils.HttpUtils;
 import link.common.utils.JsonUtils;
@@ -18,14 +18,14 @@ import java.util.Objects;
 public class AccessTokenManager {
 
   @Autowired
-  private BaseProperties weComProperties;
+  private BaseProperties baseProperties;
 
   public AccessTokenResponse getAccessToken(String corpId, String corpSecret) {
     if (StringUtils.isBlank(corpId) || StringUtils.isBlank(corpSecret)) {
       log.error("获取企业微信AccessToken失败，corpId:{}, secret:{}", corpId, corpSecret);
       return null;
     }
-    String baseUrl = weComProperties.getBaseUrl();
+    String baseUrl = baseProperties.getBaseUrl();
     String url = baseUrl + "/gettoken";
     Map<String, String> params = new HashMap<>();
     params.put("corpid", corpId);

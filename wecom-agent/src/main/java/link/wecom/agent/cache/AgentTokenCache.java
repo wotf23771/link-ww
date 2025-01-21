@@ -1,4 +1,4 @@
-package link.wecom.base.cache;
+package link.wecom.agent.cache;
 
 import link.redis.cache.CacheFactory;
 import org.apache.commons.lang3.StringUtils;
@@ -6,7 +6,7 @@ import org.springframework.cache.Cache;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AccessTokenCache {
+public class AgentTokenCache {
 
   private static final String cacheName = "wecom:token";
 

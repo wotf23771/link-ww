@@ -17,6 +17,7 @@
     <module>example</module>
     <module>wecom-base</module>
     <module>wecom-msg-audit</module>
+    <module>wecom-agent</module>
   </modules>
   <properties>
 
@@ -38,6 +39,12 @@
         <artifactId>wecom-base</artifactId>
         <version>${revision}</version>
       </dependency>
+      <dependency>
+        <groupId>link</groupId>
+        <artifactId>wecom-agent</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
       <dependency>
         <groupId>link</groupId>
         <artifactId>wecom-msg-audit</artifactId>
