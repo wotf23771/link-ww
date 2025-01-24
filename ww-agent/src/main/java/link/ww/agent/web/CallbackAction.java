@@ -1,22 +1,15 @@
 package link.ww.agent.web;
 
+import link.common.spring.SpringApplicationContext;
 import link.ww.agent.Agent;
 import link.ww.agent.aes.AesException;
 import link.ww.agent.aes.WXBizMsgCrypt;
 import link.ww.agent.service.AgentService;
 import link.ww.base.BaseProperties;
+import link.ww.base.event.CallbackEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.StringReader;
 
 @Slf4j
 @RestController
@@ -84,53 +77,14 @@ public class CallbackAction {
     String echoStr;
     try {
       echoStr = wxcpt.DecryptMsg(msg_signature, timestamp, nonce, body);
-      log.info("post请求的明文：{}", echoStr);
-      DocumentBuilder db = getDocumentBuilder();
-      StringReader sr = new StringReader(echoStr);
-      InputSource is = new InputSource(sr);
-      Document document = db.parse(is);
-      Element root = document.getDocumentElement();
-      String infoType = getElementContent(root, "InfoType");
+      log.debug("post请求的明文：{}", echoStr);
+      CallbackEvent callbackEvent = new CallbackEvent(this, echoStr);
+      SpringApplicationContext.publishEvent(callbackEvent);
     } catch (Exception e) {
       e.printStackTrace();
       return ERROR;
     }
     return SUCCESS;
-  }
-
-  private String getElementContent(Element root, String elementName) {
-    if (root == null) {
-      return null;
-    }
-    NodeList infoTypeList = root.getElementsByTagName(elementName);
-    if (infoTypeList.getLength() > 0) {
-      return infoTypeList.item(0).getTextContent();
-    }
-    return null;
-  }
-
-  private String getElementContent(String xml, String elementName) {
-    String content = null;
-    try {
-      DocumentBuilder db = getDocumentBuilder();
-      StringReader sr = new StringReader(xml);
-      InputSource is = new InputSource(sr);
-      Document document = db.parse(is);
-      Element root = document.getDocumentElement();
-      content = getElementContent(root, elementName);
-    } catch (Exception e) {
-      log.error(e.getMessage(), e);
-    }
-    return content;
-  }
-
-  private DocumentBuilder getDocumentBuilder() {
-    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-    try {
-      return dbf.newDocumentBuilder();
-    } catch (ParserConfigurationException e) {
-      throw new RuntimeException(e);
-    }
   }
 
 }
