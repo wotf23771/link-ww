@@ -21,7 +21,7 @@ public class AccessTokenManager extends BaseManager {
     Map<String, Object> params = new HashMap<>();
     params.put("corpid", corpId);
     params.put("corpsecret", corpSecret);
-    return get(uri, params, AccessTokenResponse.class);
+    return executeGet(uri, params, AccessTokenResponse.class);
   }
 
 }

@@ -2,15 +2,15 @@ package link.ww.contacts.manager;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import link.ww.base.domain.BaseResponse;
-import link.ww.contacts.domain.ContactsDept;
+import link.ww.contacts.domain.ContactsUser;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class ListDeptResponse extends BaseResponse {
+public class ListSimpleUserResponse extends BaseResponse {
 
-  @JsonProperty("department")
-  private List<ContactsDept> data;
+  @JsonProperty("userlist")
+  private List<ContactsUser> data;
 
 }

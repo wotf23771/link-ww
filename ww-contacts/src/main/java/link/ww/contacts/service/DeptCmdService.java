@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @since 2025/1/24 14:30
  */
 @Service
-public class ContactsCmdService {
+public class DeptCmdService {
 
   @Autowired
   private AgentTokenService agentTokenService;

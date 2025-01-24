@@ -5,12 +5,10 @@ import link.ww.base.domain.BaseResponse;
 import link.ww.contacts.domain.ContactsDept;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class ListDeptResponse extends BaseResponse {
+public class GetDeptResponse extends BaseResponse {
 
   @JsonProperty("department")
-  private List<ContactsDept> data;
+  private ContactsDept data;
 
 }

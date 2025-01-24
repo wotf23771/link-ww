@@ -5,15 +5,17 @@ import link.common.utils.HttpUtils;
 import link.common.utils.JsonUtils;
 import link.common.utils.UrlUtils;
 import link.ww.base.BaseProperties;
+import link.ww.base.domain.BaseResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 public abstract class BaseManager {
 
-  public <T> T get(String uri, Map<String, Object> queryParams, Class<T> clazz) {
+  public <T> T executeGet(String uri, Map<String, Object> queryParams, Class<T> clazz) {
     BaseProperties baseProperties = SpringApplicationContext.getBean(BaseProperties.class);
     String url = baseProperties.getBaseUrl() + uri;
     if (queryParams == null) {
@@ -22,11 +24,31 @@ public abstract class BaseManager {
     url = UrlUtils.build(url, queryParams);
     HttpUtils.HttpResult result = HttpUtils.get(url);
     if (result.isSuccess()) {
-      return JsonUtils.fromJson(result.getBody(), clazz);
+      String body = result.getBody();
+      BaseResponse baseResponse = JsonUtils.fromJson(body, BaseResponse.class);
+      if (baseResponse == null) {
+        log.error(buildError(uri, queryParams, body));
+        return null;
+      }
+      if (Objects.equals(baseResponse.getErrCode(), 0)) {
+        log.debug(body);
+        return JsonUtils.fromJson(body, clazz);
+      } else {
+        log.error(buildError(uri, queryParams, body));
+        return null;
+      }
     } else {
-      log.error(result.getBody());
+      log.error(buildError(uri, queryParams, result.getBody()));
       return null;
     }
+  }
+
+  private String buildError(String uri, Map<String, Object> params, String body) {
+    return "request error \n>>>>>>\n" +
+        "uri: " + uri + "\n" +
+        "query: " + params + "\n" +
+        "response: " + body + "\n" +
+        "<<<<<<";
   }
 
 }
