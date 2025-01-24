@@ -5,19 +5,19 @@
   <parent>
     <groupId>link</groupId>
     <artifactId>link-parent</artifactId>
-    <version>3.3.7-SNAPSHOT</version>
+    <version>3.3.8-SNAPSHOT</version>
   </parent>
 
   <groupId>link</groupId>
-  <artifactId>link-wecom</artifactId>
-  <version>${revision}</version>
+  <artifactId>link-ww</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>link-wecom</name>
+  <name>link-ww</name>
   <modules>
     <module>example</module>
-    <module>wecom-base</module>
-    <module>wecom-msg-audit</module>
-    <module>wecom-agent</module>
+    <module>ww-base</module>
+    <module>ww-msg-audit</module>
+    <module>ww-agent</module>
   </modules>
   <properties>
 
@@ -27,7 +27,6 @@
 
     <revision>1.0.0-SNAPSHOT</revision>
 
-    <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
     <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
   </properties>
@@ -36,18 +35,18 @@
     <dependencies>
       <dependency>
         <groupId>link</groupId>
-        <artifactId>wecom-base</artifactId>
+        <artifactId>ww-base</artifactId>
         <version>${revision}</version>
       </dependency>
       <dependency>
         <groupId>link</groupId>
-        <artifactId>wecom-agent</artifactId>
+        <artifactId>ww-agent</artifactId>
         <version>${revision}</version>
       </dependency>
 
       <dependency>
         <groupId>link</groupId>
-        <artifactId>wecom-msg-audit</artifactId>
+        <artifactId>ww-msg-audit</artifactId>
         <version>${revision}</version>
       </dependency>
     </dependencies>
@@ -63,19 +62,6 @@
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>${maven-source-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>

@@ -1,8 +1,0 @@
-[
-  {
-    "name": "wecom:token",
-    "ttl": 7000,
-    "valueSerializer": "json",
-    "remark": "企业 access_token"
-  }
-]
