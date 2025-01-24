@@ -18,6 +18,8 @@
     <module>ww-base</module>
     <module>ww-msg-audit</module>
     <module>ww-agent</module>
+    <module>ww-auth</module>
+    <module>ww-contacts</module>
   </modules>
   <properties>
 
@@ -41,6 +43,16 @@
       <dependency>
         <groupId>link</groupId>
         <artifactId>ww-agent</artifactId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <groupId>link</groupId>
+        <artifactId>ww-auth</artifactId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <groupId>link</groupId>
+        <artifactId>ww-contacts</artifactId>
         <version>${revision}</version>
       </dependency>
 

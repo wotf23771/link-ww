@@ -16,4 +16,6 @@ public class BaseProperties {
 
   private String defaultAgent;
 
+  private String contactsSyncAgent;
+
 }

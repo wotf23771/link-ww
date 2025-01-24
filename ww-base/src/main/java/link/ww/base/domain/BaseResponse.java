@@ -24,4 +24,8 @@ public class BaseResponse {
   @JsonProperty("errmsg")
   private String errMsg;
 
+  public boolean isSuccess() {
+    return this.errCode == 0;
+  }
+
 }
