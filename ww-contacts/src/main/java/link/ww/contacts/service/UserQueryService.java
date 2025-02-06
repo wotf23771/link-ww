@@ -2,7 +2,9 @@ package link.ww.contacts.service;
 
 import link.ww.base.service.AccessTokenService;
 import link.ww.contacts.domain.ContactsUser;
+import link.ww.contacts.domain.ContactsUserDetail;
 import link.ww.contacts.manager.ListSimpleUserResponse;
+import link.ww.contacts.manager.ListUserResponse;
 import link.ww.contacts.manager.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,16 @@ public class UserQueryService {
   public List<ContactsUser> listUser(Integer deptId) {
     String token = accessTokenService.getAccessToken();
     ListSimpleUserResponse response = userManager.listSimple(token, deptId);
+    if (response != null) {
+      return response.getData();
+    } else {
+      return null;
+    }
+  }
+
+  public List<ContactsUserDetail> listUserDetail(Integer deptId) {
+    String token = accessTokenService.getAccessToken();
+    ListUserResponse response = userManager.list(token, deptId);
     if (response != null) {
       return response.getData();
     } else {

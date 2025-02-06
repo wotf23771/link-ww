@@ -21,4 +21,13 @@ public class UserManager extends BaseManager {
     return executeGet(uri, params, ListSimpleUserResponse.class);
   }
 
+  public ListUserResponse list(String accessToken, Integer deptId) {
+    Assert.notNull(deptId, "部门id不能为空");
+    String uri = "/user/list";
+    Map<String, Object> params = new HashMap<>();
+    params.put("department_id", deptId);
+    params.put("access_token", accessToken);
+    return executeGet(uri, params, ListUserResponse.class);
+  }
+
 }

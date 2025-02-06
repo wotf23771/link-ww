@@ -2,10 +2,12 @@ package link.ww.contacts.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 
 @Data
+@ToString(callSuper = true)
 public class ContactsUserDetail extends ContactsUser {
 
   private List<Integer> order;
