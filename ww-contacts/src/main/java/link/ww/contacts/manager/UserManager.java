@@ -30,4 +30,13 @@ public class UserManager extends BaseManager {
     return executeGet(uri, params, ListUserResponse.class);
   }
 
+  public GetUserResponse get(String accessToken, String userId) {
+    Assert.notNull(userId, "用户id不能为空");
+    String uri = "/user/get";
+    Map<String, Object> params = new HashMap<>();
+    params.put("userid", userId);
+    params.put("access_token", accessToken);
+    return executeGet(uri, params, GetUserResponse.class);
+  }
+
 }

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGe
 
 @Configuration
 @EnableConfigurationProperties(BaseProperties.class)
-@ComponentScan(value = LinkConstant.COMPONENT_PREFIX + "ww.base", nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class)
+@ComponentScan(value = LinkConstant.COMPONENT_PREFIX + ".ww.base", nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class)
 public class BaseAutoConfig {
 
 }

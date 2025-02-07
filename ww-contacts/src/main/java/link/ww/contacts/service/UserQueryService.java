@@ -46,4 +46,9 @@ public class UserQueryService {
     }
   }
 
+  public ContactsUserDetail getUserDetail(String userId) {
+    String token = accessTokenService.getAccessToken();
+    return userManager.get(token, userId);
+  }
+
 }
