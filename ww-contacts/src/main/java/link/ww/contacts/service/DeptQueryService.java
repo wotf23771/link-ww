@@ -27,6 +27,12 @@ public class DeptQueryService {
   @Autowired
   private DeptManager deptManager;
 
+  /**
+   * 获取部门列表
+   *
+   * @param parentId 部门id。获取指定部门及其下的子部门（以及子部门的子部门等等，递归）。 如果不填，默认获取全量组织架构
+   * @return
+   */
   public List<ContactsDept> listDept(Integer parentId) {
     String token = accessTokenService.getAccessToken();
     ListDeptResponse response = deptManager.list(token, parentId);
@@ -37,6 +43,12 @@ public class DeptQueryService {
     }
   }
 
+  /**
+   * 获取子部门ID列表
+   *
+   * @param parentId 部门id。获取指定部门及其下的子部门（以及子部门的子部门等等，递归）。 如果不填，默认获取全量组织架构
+   * @return
+   */
   public List<ContactsDeptId> listDeptId(Integer parentId) {
     String token = accessTokenService.getAccessToken();
     ListDeptSimpleResponse response = deptManager.listSimple(token, parentId);
@@ -47,6 +59,12 @@ public class DeptQueryService {
     }
   }
 
+  /**
+   * 获取单个部门详情
+   *
+   * @param deptId 部门id
+   * @return
+   */
   public ContactsDept getDept(Integer deptId) {
     String token = accessTokenService.getAccessToken();
     GetDeptResponse response = deptManager.get(token, deptId);

@@ -26,6 +26,12 @@ public class UserQueryService {
   @Autowired
   private UserManager userManager;
 
+  /**
+   * 获取部门成员基本信息
+   *
+   * @param deptId 部门ID
+   * @return
+   */
   public List<ContactsUser> listUser(Integer deptId) {
     String token = accessTokenService.getAccessToken();
     ListSimpleUserResponse response = userManager.listSimple(token, deptId);
@@ -36,6 +42,12 @@ public class UserQueryService {
     }
   }
 
+  /**
+   * 获取部门成员详细信息
+   *
+   * @param deptId 部门ID
+   * @return
+   */
   public List<ContactsUserDetail> listUserDetail(Integer deptId) {
     String token = accessTokenService.getAccessToken();
     ListUserResponse response = userManager.list(token, deptId);
@@ -46,6 +58,12 @@ public class UserQueryService {
     }
   }
 
+  /**
+   * 获取成员详细信息
+   *
+   * @param userId 成员userId
+   * @return
+   */
   public ContactsUserDetail getUserDetail(String userId) {
     String token = accessTokenService.getAccessToken();
     return userManager.get(token, userId);
