@@ -4,12 +4,15 @@ import link.common.utils.StringUtils;
 import link.ww.base.BaseProperties;
 import link.ww.base.service.AccessTokenService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class DefaultTokenService implements AccessTokenService {
+@ConditionalOnProperty(name = "link.ww.base.agent-type", havingValue = "inner")
+public class DefaultTokenService implements AccessTokenService, InitializingBean {
 
   @Autowired
   private BaseProperties baseProperties;
@@ -23,6 +26,11 @@ public class DefaultTokenService implements AccessTokenService {
       return null;
     }
     return agentTokenService.getAgentToken(defaultAgent);
+  }
+
+  @Override
+  public void afterPropertiesSet() {
+    log.debug("AccessTokenService is [{}]", DefaultTokenService.class.getName());
   }
 
 }

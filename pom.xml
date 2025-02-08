@@ -18,8 +18,8 @@
     <module>ww-base</module>
     <module>ww-msg-audit</module>
     <module>ww-agent</module>
-    <module>ww-auth</module>
     <module>ww-contacts</module>
+    <module>ww-third</module>
   </modules>
   <properties>
 
@@ -47,7 +47,7 @@
       </dependency>
       <dependency>
         <groupId>link</groupId>
-        <artifactId>ww-auth</artifactId>
+        <artifactId>ww-third</artifactId>
         <version>${revision}</version>
       </dependency>
       <dependency>

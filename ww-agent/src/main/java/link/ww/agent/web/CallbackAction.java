@@ -2,11 +2,11 @@ package link.ww.agent.web;
 
 import link.common.spring.SpringApplicationContext;
 import link.ww.agent.Agent;
-import link.ww.agent.aes.AesException;
-import link.ww.agent.aes.WXBizMsgCrypt;
 import link.ww.agent.service.AgentService;
 import link.ww.base.BaseProperties;
-import link.ww.base.event.CallbackEvent;
+import link.ww.base.aes.AesException;
+import link.ww.base.aes.WXBizMsgCrypt;
+import link.ww.base.event.EventCallbackEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +38,7 @@ public class CallbackAction {
         return ERROR;
       }
       String token = agent.getToken();
-      String aseKey = agent.getEncodingAESKey();
+      String aseKey = agent.getEncodingAesKey();
       wxcpt = new WXBizMsgCrypt(token, aseKey, baseProperties.getCorpId());
     } catch (AesException e) {
       throw new RuntimeException(e);
@@ -69,7 +69,7 @@ public class CallbackAction {
         return ERROR;
       }
       String token = agent.getToken();
-      String aseKey = agent.getEncodingAESKey();
+      String aseKey = agent.getEncodingAesKey();
       wxcpt = new WXBizMsgCrypt(token, aseKey, baseProperties.getCorpId());
     } catch (AesException e) {
       throw new RuntimeException(e);
@@ -78,8 +78,8 @@ public class CallbackAction {
     try {
       echoStr = wxcpt.DecryptMsg(msg_signature, timestamp, nonce, body);
       log.debug("post请求的明文：{}", echoStr);
-      CallbackEvent callbackEvent = new CallbackEvent(this, echoStr);
-      SpringApplicationContext.publishEvent(callbackEvent);
+      EventCallbackEvent eventCallbackEvent = new EventCallbackEvent(this, echoStr);
+      SpringApplicationContext.publishEvent(eventCallbackEvent);
     } catch (Exception e) {
       e.printStackTrace();
       return ERROR;

@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
-@ConfigurationProperties(prefix = "link.ww.msg.audit")
+@ConfigurationProperties(prefix = MsgAuditConstant.CONFIG_PREFIX)
 public class MsgAuditProperties {
 
   private String agent;
