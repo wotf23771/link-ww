@@ -16,7 +16,7 @@ public class BaseResponse {
    * 返回码
    */
   @JsonProperty("errcode")
-  private Integer errCode;
+  private Integer errCode = 0;
 
   /**
    * 对返回码的文本描述内容

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "ww:third:suite_ticket",
+    "ttl": -1,
+    "valueSerializer": "json",
+    "remark": "第三方应用 ticket"
+  },
+  {
+    "name": "ww:third:provider_token",
+    "ttl": 7000,
+    "valueSerializer": "json",
+    "remark": "服务商token"
+  }
+]

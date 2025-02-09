@@ -15,6 +15,34 @@ import java.util.Objects;
 @Slf4j
 public abstract class BaseManager {
 
+  public <T> T executePost(String uri, Map<String, Object> queryParams, String requestBody, Class<T> clazz) {
+    BaseProperties baseProperties = SpringApplicationContext.getBean(BaseProperties.class);
+    String url = baseProperties.getBaseUrl() + uri;
+    if (queryParams == null) {
+      queryParams = new HashMap<>();
+    }
+    url = UrlUtils.build(url, queryParams);
+    HttpUtils.HttpResult result = HttpUtils.postJson(url, requestBody);
+    if (result.isSuccess()) {
+      String responseBody = result.getBody();
+      BaseResponse baseResponse = JsonUtils.fromJson(responseBody, BaseResponse.class);
+      if (baseResponse == null) {
+        log.error(buildError(uri, queryParams, responseBody));
+        return null;
+      }
+      if (Objects.equals(baseResponse.getErrCode(), 0)) {
+        log.debug(responseBody);
+        return JsonUtils.fromJson(responseBody, clazz);
+      } else {
+        log.error(buildError(uri, queryParams, responseBody));
+        return null;
+      }
+    } else {
+      log.error(buildError(uri, queryParams, result.getBody()));
+      return null;
+    }
+  }
+
   public <T> T executeGet(String uri, Map<String, Object> queryParams, Class<T> clazz) {
     BaseProperties baseProperties = SpringApplicationContext.getBean(BaseProperties.class);
     String url = baseProperties.getBaseUrl() + uri;

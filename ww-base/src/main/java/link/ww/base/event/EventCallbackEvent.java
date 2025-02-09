@@ -47,6 +47,10 @@ public class EventCallbackEvent extends ApplicationEvent {
     return XmlUtils.getFirstTagContent(rootElement, name);
   }
 
+  public Element getRootElement() {
+    return rootElement;
+  }
+
   private void parseXmlBody(String xmlBody) {
     try {
       this.xmlBody = xmlBody;
