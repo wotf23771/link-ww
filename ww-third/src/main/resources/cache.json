@@ -10,5 +10,11 @@
     "ttl": 7000,
     "valueSerializer": "json",
     "remark": "服务商token"
+  },
+  {
+    "name": "ww:third:suite_token",
+    "ttl": 7000,
+    "valueSerializer": "json",
+    "remark": "第三方应用凭证"
   }
 ]

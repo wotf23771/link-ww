@@ -21,4 +21,16 @@ public class ServiceManager extends BaseManager {
     return executePost(uri, null, JsonUtils.toJson(params), GetProviderTokenResponse.class);
   }
 
+  public GetSuiteTokenResponse getSuiteToken(String suite_id, String suite_secret, String suite_ticket) {
+    Assert.notNull(suite_id, "第三方应用id或者代开发应用模板id不能为空");
+    Assert.notNull(suite_secret, "第三方应用secret 或者代开发应用模板secret不能为空");
+    Assert.notNull(suite_ticket, "企业微信后台推送的ticket不能为空");
+    String uri = "/service/get_suite_token";
+    Map<String, Object> params = new HashMap<>();
+    params.put("suite_id", suite_id);
+    params.put("suite_secret", suite_secret);
+    params.put("suite_ticket", suite_ticket);
+    return executePost(uri, null, JsonUtils.toJson(params), GetSuiteTokenResponse.class);
+  }
+
 }
