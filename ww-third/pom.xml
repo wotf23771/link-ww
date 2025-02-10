@@ -33,5 +33,15 @@
       <groupId>link</groupId>
       <artifactId>ww-base</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>com.mysql</groupId>
+      <artifactId>mysql-connector-j</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>link</groupId>
+      <artifactId>link-mybatis-starter</artifactId>
+    </dependency>
   </dependencies>
 </project>

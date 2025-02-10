@@ -8,6 +8,9 @@ import org.w3c.dom.Element;
 
 import java.util.Objects;
 
+/**
+ * 刷新Ticket
+ */
 @Component
 public class SuiteTicketProcessor implements CommandProcessor {
 

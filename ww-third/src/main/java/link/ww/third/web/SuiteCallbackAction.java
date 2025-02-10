@@ -48,7 +48,7 @@ public class SuiteCallbackAction {
     String echoStr;
     try {
       echoStr = wxcpt.VerifyURL(msg_signature, timestamp, nonce, echostr);
-      log.debug("返回的明文：{}", echoStr);
+      log.debug("数据回调，验证：{}", echoStr);
     } catch (Exception e) {
       //验证URL失败，错误原因请查看异常
       e.printStackTrace();
@@ -78,7 +78,7 @@ public class SuiteCallbackAction {
     String echoStr;
     try {
       echoStr = wxcpt.DecryptMsg(msg_signature, timestamp, nonce, body);
-      log.debug("post请求的明文：{}", echoStr);
+      log.debug("数据回调，接收数据：{}", echoStr);
       EventCallbackEvent eventCallbackEvent = new EventCallbackEvent(this, echoStr);
       SpringApplicationContext.publishEvent(eventCallbackEvent);
     } catch (Exception e) {
@@ -106,7 +106,7 @@ public class SuiteCallbackAction {
     String echoStr;
     try {
       echoStr = wxcpt.VerifyURL(msg_signature, timestamp, nonce, echostr);
-      log.debug("返回的明文：{}", echoStr);
+      log.debug("指令回调，验证：{}", echoStr);
     } catch (Exception e) {
       //验证URL失败，错误原因请查看异常
       e.printStackTrace();
@@ -131,7 +131,7 @@ public class SuiteCallbackAction {
     String echoStr;
     try {
       echoStr = wxcpt.DecryptMsg(msg_signature, timestamp, nonce, body);
-      log.debug("post请求的明文：{}", echoStr);
+      log.debug("指令回调，接收数据：{}", echoStr);
       CommandCallbackEvent callbackEvent = new CommandCallbackEvent(this, echoStr);
       SpringApplicationContext.publishEvent(callbackEvent);
     } catch (Exception e) {
