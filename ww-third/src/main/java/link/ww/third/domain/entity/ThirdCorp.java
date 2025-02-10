@@ -32,4 +32,9 @@ public class ThirdCorp {
 
   private Date createTime;
 
+  /**
+   * 授权信息
+   */
+  private String authInfo;
+
 }

@@ -82,4 +82,28 @@ public class ServiceManager extends BaseManager {
     return executePost(uri, queryParam, JsonUtils.toJson(bodyParam), GetPermanentCodeResponse.class);
   }
 
+  /**
+   * 获取企业授权信息
+   *
+   * @param suiteAccessToken
+   * @param authCorpId
+   * @param permanentCode
+   * @return
+   */
+  public GetAuthInfoResponse getAuthInfo(String suiteAccessToken, String authCorpId, String permanentCode) {
+    Assert.notNull(suiteAccessToken, "SuiteAccessToken不能为空");
+    Assert.notNull(authCorpId, "授权方corpid不能为空");
+    Assert.notNull(permanentCode, "永久授权码不能为空");
+
+    String uri = "/service/v2/get_auth_info";
+    Map<String, Object> queryParam = new HashMap<>();
+    queryParam.put("suite_access_token", suiteAccessToken);
+
+    Map<String, String> bodyParam = new HashMap<>();
+    bodyParam.put("auth_corpid", authCorpId);
+    bodyParam.put("permanent_code", permanentCode);
+
+    return executePost(uri, queryParam, JsonUtils.toJson(bodyParam), GetAuthInfoResponse.class);
+  }
+
 }

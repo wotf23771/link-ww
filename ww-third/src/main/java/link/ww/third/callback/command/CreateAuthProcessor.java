@@ -59,6 +59,9 @@ public class CreateAuthProcessor implements CommandProcessor {
       thirdCorp.setPermanentCode(permanentCode);
       thirdCorpService.update(thirdCorp);
     }
+
+    // 更新授权信息，即更新应用、成员信息
+    thirdCorpService.updateAuthInfo(corpId);
   }
 
 }

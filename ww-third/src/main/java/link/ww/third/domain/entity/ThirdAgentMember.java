@@ -6,14 +6,14 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 安装的应用
+ * 应用成员
  *
  * @author wangxiaolei
- * @since 2025/2/10 11:08
+ * @since 2025/2/10 15:53
  */
 @Data
-@TableName(value = "ww_third_agent")
-public class ThirdAgent {
+@TableName(value = "ww_third_agent_member")
+public class ThirdAgentMember {
 
   private String id;
 
@@ -21,11 +21,12 @@ public class ThirdAgent {
 
   private Integer agentId;
 
-  private String agentName;
+  /**
+   * 成员类型，user:用户,dept:部门,tag:标签
+   */
+  private String memberType;
 
-  private Integer authMode;
-
-  private Integer privilegeLevel;
+  private String memberId;
 
   private Date createTime;
 
