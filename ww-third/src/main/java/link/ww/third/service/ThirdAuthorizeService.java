@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @ConditionalOnProperty(name = "link.ww.base.agent-type", havingValue = "third")
-public class ThirdAuthService implements AuthorizeService, InitializingBean {
+public class ThirdAuthorizeService implements AuthorizeService, InitializingBean {
 
   @Override
   public String getAuthorizeUrl(String state) {
@@ -23,7 +23,7 @@ public class ThirdAuthService implements AuthorizeService, InitializingBean {
 
   @Override
   public void afterPropertiesSet() {
-    log.debug("AuthorizeService is [{}]", ThirdAuthService.class.getName());
+    log.debug("AuthorizeService is [{}]", ThirdAuthorizeService.class.getName());
   }
 
 }
