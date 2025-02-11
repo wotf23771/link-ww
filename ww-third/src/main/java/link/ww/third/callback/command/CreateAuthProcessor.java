@@ -13,10 +13,23 @@ import org.w3c.dom.Element;
 import java.util.Objects;
 
 /**
- * 应用授权
+ * 应用授权通知处理器
+ * 
+ * <pre>
+ * XML格式:
+ * {@code
+ * <xml>
+ *   <SuiteId><![CDATA[ww4asffe99e54c0f4c]]></SuiteId>
+ *   <AuthCode><![CDATA[AUTHCODE]]></AuthCode>
+ *   <InfoType><![CDATA[create_auth]]></InfoType>
+ *   <TimeStamp>1403610513</TimeStamp>
+ *   <State><![CDATA[state]]></State>
+ * </xml>
+ * }
+ * </pre>
  *
  * @author wangxiaolei
- * @since 2025/2/10 10:26
+ * @since 2025/2/10
  */
 @Component
 public class CreateAuthProcessor implements CommandProcessor {

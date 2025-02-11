@@ -10,6 +10,21 @@ import java.util.Objects;
 
 /**
  * 刷新Ticket
+ * 
+ * <pre>
+ * XML格式:
+ * {@code
+ * <xml>
+ *     <SuiteId><![CDATA[ww4asffe99e54c0f4c]]></SuiteId>
+ *     <InfoType><![CDATA[suite_ticket]]></InfoType>
+ *     <TimeStamp>1403610513</TimeStamp>
+ *     <SuiteTicket><![CDATA[asdfasfas]]></SuiteTicket>
+ * </xml>
+ * }
+ * </pre>
+ *
+ * @author wangxiaolei
+ * @since 2025/2/10
  */
 @Component
 public class SuiteTicketProcessor implements CommandProcessor {
