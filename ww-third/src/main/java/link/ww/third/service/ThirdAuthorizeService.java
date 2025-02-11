@@ -23,9 +23,6 @@ import org.springframework.stereotype.Service;
 public class ThirdAuthorizeService implements AuthorizeService, InitializingBean {
 
   @Autowired
-  private BaseProperties baseProperties;
-
-  @Autowired
   private ThirdProperties thirdProperties;
 
   @Override
@@ -43,44 +40,44 @@ public class ThirdAuthorizeService implements AuthorizeService, InitializingBean
   public String getAuthorizeUrl(String state, AuthorizeScope scope) {
     // 前端传入完整的回调地址
     String redirectUri = state;
-    
+
     return String.format(thirdProperties.getOauth2().getAuthorizeUrl() +
             "?appid=%s" +
             "&redirect_uri=%s" +
             "&state=%s" +
-            "&usertype=member",
+            "&usertype=member" +
+            "&scope=%s",
         thirdProperties.getSuiteId(),
         redirectUri,
-        state);
+        state,
+        scope.getScope());
   }
 
   @Override
   public String getWebAuthorizeUrl(String state) {
+    // 调用重载方法，传入默认的scope值
     return getWebAuthorizeUrl(state, thirdProperties.getOauth2().getScope());
   }
 
-  /**
-   * 获取企业微信第三方应用扫码授权链接
-   *
-   * @param state 重定向后会带上state参数
-   * @param scope 授权作用域
-   * @return 授权链接
-   */
   public String getWebAuthorizeUrl(String state, AuthorizeScope scope) {
+    // 扫码授权需要scope参数
     // 前端传入完整的回调地址
     String redirectUri = state;
-    
+
     return String.format(thirdProperties.getOauth2().getQrConnectUrl() +
             "?suite_id=%s" +
             "&redirect_uri=%s" +
-            "&state=%s",
+            "&state=%s" +
+            "&scope=%s",
         thirdProperties.getSuiteId(),
         redirectUri,
-        state);
+        state,
+        scope.getScope());
   }
 
   @Override
   public void afterPropertiesSet() {
     log.debug("AuthorizeService is [{}]", ThirdAuthorizeService.class.getName());
   }
+
 }
