@@ -7,6 +7,13 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
+/**
+ * 企业微信应用认证服务
+ * 处理企业微信应用的OAuth2认证
+ *
+ * @author wangxiaolei
+ * @since 2025/2/10
+ */
 @Slf4j
 @Service
 @ConditionalOnProperty(name = "link.ww.base.agent-type", havingValue = "inner")

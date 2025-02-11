@@ -10,6 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * 企业微信应用服务
+ * 提供应用配置的查询和管理功能
+ *
+ * @author wangxiaolei
+ * @since 2025/2/10
+ */
 @Slf4j
 @Service
 public class AgentService {

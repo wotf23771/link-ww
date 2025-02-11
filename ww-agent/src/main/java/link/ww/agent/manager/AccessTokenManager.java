@@ -8,6 +8,13 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 企业微信访问凭证管理器
+ * 处理企业微信access_token的获取
+ *
+ * @author wangxiaolei
+ * @since 2025/2/10
+ */
 @Slf4j
 @Service
 public class AccessTokenManager extends BaseManager {

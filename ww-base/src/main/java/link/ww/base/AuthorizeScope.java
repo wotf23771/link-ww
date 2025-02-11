@@ -1,5 +1,11 @@
 package link.ww.base;
 
+/**
+ * 企业微信授权范围枚举
+ *
+ * @author wangxiaolei
+ * @since 2025/2/10
+ */
 public enum AuthorizeScope {
   /**
    * 静默授权
