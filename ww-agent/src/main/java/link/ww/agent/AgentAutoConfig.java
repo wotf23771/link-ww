@@ -1,5 +1,6 @@
 package link.ww.agent;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGenerator;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGe
  * @since 2025/2/10
  */
 @Configuration
+@ConditionalOnProperty(name = "link.ww.base.agent-type", havingValue = "inner")
 @ComponentScan(value = AgentConstant.COMPONENT_SCOPE, nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class)
 public class AgentAutoConfig {
 

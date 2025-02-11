@@ -10,12 +10,10 @@ import link.ww.third.manager.ServiceManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-@ConditionalOnProperty(name = "link.ww.base.agent-type", havingValue = "third")
 public class CorpTokenService implements AccessTokenService, InitializingBean {
 
   @Autowired

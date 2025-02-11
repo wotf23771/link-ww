@@ -1,10 +1,10 @@
 package link.ww.msg.audit.web;
 
 import link.ww.base.BaseProperties;
+import link.ww.base.aes.AesException;
+import link.ww.base.aes.WXBizMsgCrypt;
+import link.ww.base.service.AccessTokenService;
 import link.ww.msg.audit.MsgAuditProperties;
-import link.ww.msg.audit.aes.AesException;
-import link.ww.msg.audit.aes.WXBizMsgCrypt;
-import link.ww.msg.audit.service.AccessTokenService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

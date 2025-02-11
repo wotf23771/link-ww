@@ -7,7 +7,6 @@ import link.ww.base.service.AuthorizeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-@ConditionalOnProperty(name = "link.ww.base.agent-type", havingValue = "inner")
 public class AgentAuthorizeService implements AuthorizeService, InitializingBean {
 
   @Autowired
@@ -79,10 +77,12 @@ public class AgentAuthorizeService implements AuthorizeService, InitializingBean
             "&agentid=%s" +
             "&redirect_uri=%s" +
             "&response_type=code" +
+            "&scope=%s" +
             "&state=%s",
         baseProperties.getCorpId(),
         appId,
         redirectUri,
+        scope.getScope(),
         state);
   }
 
