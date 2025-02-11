@@ -1,6 +1,5 @@
 package link.ww.agent.service;
 
-import link.common.utils.StringUtils;
 import link.ww.agent.AgentProperties;
 import link.ww.base.AuthorizeScope;
 import link.ww.base.BaseProperties;
@@ -21,7 +20,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @ConditionalOnProperty(name = "link.ww.base.agent-type", havingValue = "inner")
-public class AgentAuthService implements AuthorizeService, InitializingBean {
+public class AgentAuthorizeService implements AuthorizeService, InitializingBean {
 
   @Autowired
   private BaseProperties baseProperties;
@@ -44,7 +43,7 @@ public class AgentAuthService implements AuthorizeService, InitializingBean {
   public String getAuthorizeUrl(String state, AuthorizeScope scope) {
     // 前端传入完整的回调地址
     String redirectUri = state;
-    
+
     return String.format(agentProperties.getOauth2().getAuthorizeUrl() +
             "?appid=%s" +
             "&redirect_uri=%s" +
@@ -74,7 +73,7 @@ public class AgentAuthService implements AuthorizeService, InitializingBean {
     // 前端传入完整的回调地址
     String redirectUri = state;
     String appId = baseProperties.getDefaultAgent();
-    
+
     return String.format(agentProperties.getOauth2().getQrConnectUrl() +
             "?appid=%s" +
             "&agentid=%s" +
@@ -89,6 +88,7 @@ public class AgentAuthService implements AuthorizeService, InitializingBean {
 
   @Override
   public void afterPropertiesSet() {
-    log.debug("AuthorizeService is [{}]", AgentAuthService.class.getName());
+    log.debug("AuthorizeService is [{}]", AgentAuthorizeService.class.getName());
   }
+
 }
