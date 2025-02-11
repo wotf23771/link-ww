@@ -1,10 +1,23 @@
-HELP.md
+### Maven ###
 target/
-!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+.mvn/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+dependency-reduced-pom.xml
 
-### STS ###
+### 编译文件 ###
+*.class
+*.jar
+*.war
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### IDE - STS ###
 .apt_generated
 .classpath
 .factorypath
@@ -13,22 +26,35 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
+### IDE - IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
+### IDE - NetBeans ###
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-### VS Code ###
+### IDE - VS Code ###
 .vscode/
+
+### 日志文件 ###
+*.log
+logs/
+
+### 系统文件 ###
+.DS_Store
+Thumbs.db
+
+### 临时文件 ###
+*.swp
+*.bak
+*.tmp
+HELP.md
+
+### 项目特定 ###
 example
