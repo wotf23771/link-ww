@@ -12,9 +12,25 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * 企业微信API基础管理器
+ * 提供HTTP请求封装，统一处理企业微信API的调用
+ *
+ * @author wangxiaolei
+ * @since 2025/2/10
+ */
 @Slf4j
 public abstract class BaseManager {
 
+  /**
+   * 执行POST请求
+   *
+   * @param uri 接口路径
+   * @param queryParams 查询参数
+   * @param requestBody 请求体
+   * @param clazz 返回值类型
+   * @return API响应结果
+   */
   public <T> T executePost(String uri, Map<String, Object> queryParams, String requestBody, Class<T> clazz) {
     BaseProperties baseProperties = SpringApplicationContext.getBean(BaseProperties.class);
     String url = baseProperties.getBaseUrl() + uri;

@@ -6,35 +6,44 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 安装了应用的企业
+ * 已授权的企业信息
+ * 存储安装了第三方应用的企业基本信息和授权状态
  *
+ * <p>表名: ww_third_corp
+ * 
  * @author wangxiaolei
- * @since 2025/2/10 11:08
+ * @since 2025/2/10
  */
 @Data
 @TableName(value = "ww_third_corp")
 public class ThirdCorp {
 
-  /**
-   * 企业 corp_id
-   */
-  private String id;
+    /**
+     * 企业ID，即企业微信的corpid
+     * 主键，最大长度64字符
+     */
+    private String id;
 
-  /**
-   * 企业 corp_name
-   */
-  private String name;
+    /**
+     * 企业名称，即企业简称
+     * 最大长度100字符
+     */
+    private String name;
 
-  /**
-   * 永久授权码
-   */
-  private String permanentCode;
+    /**
+     * 企业永久授权码
+     * 用于获取企业的access_token，最大长度512字符
+     */
+    private String permanentCode;
 
-  private Date createTime;
+    /**
+     * 记录创建时间
+     */
+    private Date createTime;
 
-  /**
-   * 授权信息
-   */
-  private String authInfo;
-
+    /**
+     * 企业的授权信息，JSON格式
+     * 包含应用权限、部门权限等信息
+     */
+    private String authInfo;
 }
