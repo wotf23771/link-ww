@@ -15,7 +15,7 @@ import java.util.Objects;
 
 /**
  * 应用授权通知处理器
- * 
+ *
  * <pre>
  * XML格式:
  * {@code
@@ -54,24 +54,24 @@ public class CreateAuthProcessor implements CommandProcessor {
   public void process(Element root) {
     String authCode = XmlUtils.getFirstTagContent(root, "AuthCode");
     String suiteAccessToken = suiteTokenService.getToken();
-    
+
     GetPermanentCodeResponse response = serviceManager.getPermanentCode(suiteAccessToken, authCode);
     if (response == null) {
       log.error("Failed to get permanent code for authCode: {}", authCode);
       return;
     }
-    
+
     saveOrUpdateThirdCorp(response);
-    
+
     // 更新授权信息，即更新应用、成员信息
     thirdCorpService.updateAuthInfo(response.getAuthCorpInfo().getCorpId());
   }
-  
+
   private void saveOrUpdateThirdCorp(GetPermanentCodeResponse response) {
     String corpId = response.getAuthCorpInfo().getCorpId();
     String corpName = response.getAuthCorpInfo().getCorpName();
     String permanentCode = response.getPermanentCode();
-    
+
     ThirdCorp thirdCorp = thirdCorpService.get(corpId);
     if (thirdCorp == null) {
       thirdCorp = new ThirdCorp();
