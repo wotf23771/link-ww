@@ -6,6 +6,7 @@ import link.ww.third.manager.GetPermanentCodeResponse;
 import link.ww.third.manager.ServiceManager;
 import link.ww.third.service.SuiteTokenService;
 import link.ww.third.service.ThirdCorpService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Element;
@@ -31,6 +32,7 @@ import java.util.Objects;
  * @author wangxiaolei
  * @since 2025/2/10
  */
+@Slf4j
 @Component
 public class CreateAuthProcessor implements CommandProcessor {
 
@@ -52,14 +54,24 @@ public class CreateAuthProcessor implements CommandProcessor {
   public void process(Element root) {
     String authCode = XmlUtils.getFirstTagContent(root, "AuthCode");
     String suiteAccessToken = suiteTokenService.getToken();
+    
     GetPermanentCodeResponse response = serviceManager.getPermanentCode(suiteAccessToken, authCode);
     if (response == null) {
+      log.error("Failed to get permanent code for authCode: {}", authCode);
       return;
     }
-    String permanentCode = response.getPermanentCode();
+    
+    saveOrUpdateThirdCorp(response);
+    
+    // 更新授权信息，即更新应用、成员信息
+    thirdCorpService.updateAuthInfo(response.getAuthCorpInfo().getCorpId());
+  }
+  
+  private void saveOrUpdateThirdCorp(GetPermanentCodeResponse response) {
     String corpId = response.getAuthCorpInfo().getCorpId();
     String corpName = response.getAuthCorpInfo().getCorpName();
-
+    String permanentCode = response.getPermanentCode();
+    
     ThirdCorp thirdCorp = thirdCorpService.get(corpId);
     if (thirdCorp == null) {
       thirdCorp = new ThirdCorp();
@@ -67,14 +79,13 @@ public class CreateAuthProcessor implements CommandProcessor {
       thirdCorp.setName(corpName);
       thirdCorp.setPermanentCode(permanentCode);
       thirdCorpService.save(thirdCorp);
+      log.info("Created new ThirdCorp for corpId: {}", corpId);
     } else {
       thirdCorp.setName(corpName);
       thirdCorp.setPermanentCode(permanentCode);
       thirdCorpService.update(thirdCorp);
+      log.info("Updated existing ThirdCorp for corpId: {}", corpId);
     }
-
-    // 更新授权信息，即更新应用、成员信息
-    thirdCorpService.updateAuthInfo(corpId);
   }
 
 }
