@@ -1,5 +1,7 @@
 package link.ww.agent.service;
 
+import link.common.exception.BaseException;
+import link.ww.agent.Agent;
 import link.ww.agent.AgentProperties;
 import link.ww.base.AuthorizeScope;
 import link.ww.base.BaseProperties;
@@ -8,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.DefaultUriBuilderFactory;
+
+import java.net.URI;
 
 /**
  * 企业微信自建应用OAuth2认证服务实现
@@ -26,9 +31,12 @@ public class AgentAuthorizeService implements AuthorizeService, InitializingBean
   @Autowired
   private AgentProperties agentProperties;
 
+  @Autowired
+  private AgentService agentService;
+
   @Override
-  public String getAuthorizeUrl(String state) {
-    return getAuthorizeUrl(state, AuthorizeScope.BASE);
+  public String getAuthorizeUrl(String redirectUrl, String state) {
+    return getAuthorizeUrl(redirectUrl, state, AuthorizeScope.BASE);
   }
 
   /**
@@ -38,52 +46,41 @@ public class AgentAuthorizeService implements AuthorizeService, InitializingBean
    * @param scope 授权作用域
    * @return 授权链接
    */
-  public String getAuthorizeUrl(String state, AuthorizeScope scope) {
-    // 前端传入完整的回调地址
-    String redirectUri = state;
-
-    return String.format(agentProperties.getOauth2().getAuthorizeUrl() +
-            "?appid=%s" +
-            "&redirect_uri=%s" +
-            "&response_type=code" +
-            "&scope=%s" +
-            "&state=%s" +
-            "#wechat_redirect",
-        baseProperties.getCorpId(),
-        redirectUri,
-        scope.getScope(),
-        state);
-  }
-
-  @Override
-  public String getWebAuthorizeUrl(String state) {
-    return getWebAuthorizeUrl(state, AuthorizeScope.PRIVATE_INFO);
+  public String getAuthorizeUrl(String redirectUrl, String state, AuthorizeScope scope) {
+    String url = agentProperties.getAuth().getAuthorizeUrl();
+    DefaultUriBuilderFactory uriBuilderFactory = new DefaultUriBuilderFactory(url);
+    URI uri = uriBuilderFactory.builder()
+        .queryParam("appid", baseProperties.getCorpId())
+        .queryParam("redirect_uri", redirectUrl)
+        .queryParam("response_type", "code")
+        .queryParam("scope", scope.getScope())
+        .queryParam("state", state)
+        .build();
+    return uri + "#wechat_redirect";
   }
 
   /**
-   * 获取企业微信OAuth2开放式授权链接
+   * 获取企业微信Web授权链接
    *
    * @param state 重定向后会带上state参数
-   * @param scope 授权作用域
    * @return 授权链接
    */
-  public String getWebAuthorizeUrl(String state, AuthorizeScope scope) {
-    // 前端传入完整的回调地址
-    String redirectUri = state;
-    String appId = baseProperties.getDefaultAgent();
-
-    return String.format(agentProperties.getOauth2().getQrConnectUrl() +
-            "?appid=%s" +
-            "&agentid=%s" +
-            "&redirect_uri=%s" +
-            "&response_type=code" +
-            "&scope=%s" +
-            "&state=%s",
-        baseProperties.getCorpId(),
-        appId,
-        redirectUri,
-        scope.getScope(),
-        state);
+  @Override
+  public String getWebAuthorizeUrl(String redirectUrl, String state) {
+    Agent agent = agentService.getAgentByName(baseProperties.getDefaultAgent());
+    if (agent == null) {
+      throw new BaseException("找不到agent");
+    }
+    String url = agentProperties.getAuth().getWebAuthorizeUrl();
+    DefaultUriBuilderFactory uriBuilderFactory = new DefaultUriBuilderFactory(url);
+    URI uri = uriBuilderFactory.builder()
+        .queryParam("appid", baseProperties.getCorpId())
+        .queryParam("redirect_uri", redirectUrl)
+        .queryParam("agentid", agent.getAgentId())
+        .queryParam("login_type", "CorpApp")
+        .queryParam("state", state)
+        .build();
+    return uri.toString();
   }
 
   @Override

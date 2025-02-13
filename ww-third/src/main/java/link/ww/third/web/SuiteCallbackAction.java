@@ -6,7 +6,7 @@ import link.ww.base.BaseProperties;
 import link.ww.base.aes.AesException;
 import link.ww.base.aes.WXBizMsgCrypt;
 import link.ww.base.event.CommandCallbackEvent;
-import link.ww.base.event.EventCallbackEvent;
+import link.ww.base.event.DataCallbackEvent;
 import link.ww.third.ThirdProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,8 +79,8 @@ public class SuiteCallbackAction {
     try {
       echoStr = wxcpt.DecryptMsg(msg_signature, timestamp, nonce, body);
       log.debug("数据回调，接收数据：{}", echoStr);
-      EventCallbackEvent eventCallbackEvent = new EventCallbackEvent(this, echoStr);
-      SpringApplicationContext.publishEvent(eventCallbackEvent);
+      DataCallbackEvent dataCallbackEvent = new DataCallbackEvent(this, echoStr);
+      SpringApplicationContext.publishEvent(dataCallbackEvent);
     } catch (Exception e) {
       e.printStackTrace();
       return ERROR;

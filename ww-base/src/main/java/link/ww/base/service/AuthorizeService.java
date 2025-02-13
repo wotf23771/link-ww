@@ -3,7 +3,7 @@ package link.ww.base.service;
 /**
  * 企业微信OAuth2认证服务接口
  * 用于处理企业微信网页授权，获取用户身份信息
- * 
+ *
  * <p>有两种实现：
  * <ul>
  *   <li>AgentAuthService: 自建应用的OAuth2认证实现</li>
@@ -19,9 +19,9 @@ package link.ww.base.service;
  * </ol>
  *
  * @author wangxiaolei
- * @since 2025/2/10
  * @see link.ww.agent.service.AgentAuthService
  * @see link.ww.third.service.ThirdAuthorizeService
+ * @since 2025/2/10
  */
 public interface AuthorizeService {
 
@@ -29,18 +29,20 @@ public interface AuthorizeService {
    * 获取企业微信网页授权链接
    * 用于获取成员的基础信息（UserId）
    *
-   * @param state 重定向后会带上state参数，企业可以填写a-zA-Z0-9的参数值，长度不可超过128个字节
+   * @param redirectUrl 重定向地址
+   * @param state       重定向后会带上state参数，企业可以填写a-zA-Z0-9的参数值，长度不可超过128个字节
    * @return 授权链接
    */
-  String getAuthorizeUrl(String state);
+  String getAuthorizeUrl(String redirectUrl, String state);
 
   /**
    * 获取企业微信网页授权链接（开放式授权）
    * 用于获取成员的详细信息（手机号、邮箱等）
    *
-   * @param state 重定向后会带上state参数，企业可以填写a-zA-Z0-9的参数值，长度不可超过128个字节
+   * @param redirectUrl 重定向地址
+   * @param state       重定向后会带上state参数，企业可以填写a-zA-Z0-9的参数值，长度不可超过128个字节
    * @return 授权链接
    */
-  String getWebAuthorizeUrl(String state);
+  String getWebAuthorizeUrl(String redirectUrl, String state);
 
 }

@@ -38,10 +38,10 @@ public class AgentProperties implements InitializingBean {
   /**
    * OAuth2授权配置
    */
-  private OAuth2 oauth2;
+  private Auth auth;
 
   @Data
-  public static class OAuth2 {
+  public static class Auth {
 
     /**
      * 应用授权作用域
@@ -55,10 +55,14 @@ public class AgentProperties implements InitializingBean {
      */
     private String authorizeUrl = "https://open.weixin.qq.com/connect/oauth2/authorize";
 
+    private String requestAuthorizeUri;
+
     /**
-     * 企业微信扫码授权地址
+     * web登录方式
      */
-    private String qrConnectUrl = "https://open.work.weixin.qq.com/wwopen/sso/qrConnect";
+    private String webAuthorizeUrl = "https://login.work.weixin.qq.com/wwlogin/sso/login";
+
+    private String requestWebAuthorizeUri;
 
   }
 
@@ -66,10 +70,10 @@ public class AgentProperties implements InitializingBean {
   public void afterPropertiesSet() throws Exception {
     log.debug("callbackPrefix:{}", callbackPrefix);
     log.debug("agents:{}", agents);
-    if (oauth2 != null) {
-      log.debug("oauth2.scope:{}", oauth2.getScope());
-      log.debug("oauth2.authorizeUrl:{}", oauth2.getAuthorizeUrl());
-      log.debug("oauth2.qrConnectUrl:{}", oauth2.getQrConnectUrl());
+    if (auth != null) {
+      log.debug("auth.scope:{}", auth.getScope());
+      log.debug("auth.authorizeUrl:{}", auth.getAuthorizeUrl());
+      log.debug("auth.webAuthorizeUrl:{}", auth.getWebAuthorizeUrl());
     }
   }
 

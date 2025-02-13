@@ -23,8 +23,8 @@ public class ThirdAuthorizeService implements AuthorizeService, InitializingBean
   private ThirdProperties thirdProperties;
 
   @Override
-  public String getAuthorizeUrl(String state) {
-    return getAuthorizeUrl(state, thirdProperties.getOauth2().getScope());
+  public String getAuthorizeUrl(String redirectUrl, String state) {
+    return getAuthorizeUrl(redirectUrl, state, thirdProperties.getOauth2().getScope());
   }
 
   /**
@@ -34,10 +34,7 @@ public class ThirdAuthorizeService implements AuthorizeService, InitializingBean
    * @param scope 授权作用域
    * @return 授权链接
    */
-  public String getAuthorizeUrl(String state, AuthorizeScope scope) {
-    // 前端传入完整的回调地址
-    String redirectUri = state;
-
+  public String getAuthorizeUrl(String redirectUrl, String state, AuthorizeScope scope) {
     return String.format(thirdProperties.getOauth2().getAuthorizeUrl() +
             "?appid=%s" +
             "&redirect_uri=%s" +
@@ -45,29 +42,26 @@ public class ThirdAuthorizeService implements AuthorizeService, InitializingBean
             "&usertype=member" +
             "&scope=%s",
         thirdProperties.getSuiteId(),
-        redirectUri,
+        redirectUrl,
         state,
         scope.getScope());
   }
 
   @Override
-  public String getWebAuthorizeUrl(String state) {
+  public String getWebAuthorizeUrl(String redirectUrl, String state) {
     // 调用重载方法，传入默认的scope值
-    return getWebAuthorizeUrl(state, thirdProperties.getOauth2().getScope());
+    return getWebAuthorizeUrl(redirectUrl, state, thirdProperties.getOauth2().getScope());
   }
 
-  public String getWebAuthorizeUrl(String state, AuthorizeScope scope) {
+  public String getWebAuthorizeUrl(String redirectUrl, String state, AuthorizeScope scope) {
     // 扫码授权需要scope参数
-    // 前端传入完整的回调地址
-    String redirectUri = state;
-
     return String.format(thirdProperties.getOauth2().getQrConnectUrl() +
             "?suite_id=%s" +
             "&redirect_uri=%s" +
             "&state=%s" +
             "&scope=%s",
         thirdProperties.getSuiteId(),
-        redirectUri,
+        redirectUrl,
         state,
         scope.getScope());
   }
