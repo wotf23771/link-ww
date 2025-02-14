@@ -30,5 +30,9 @@
       <groupId>link</groupId>
       <artifactId>link-redisson-starter</artifactId>
     </dependency>
+    <dependency>
+      <groupId>link</groupId>
+      <artifactId>link-web-starter</artifactId>
+    </dependency>
   </dependencies>
 </project>

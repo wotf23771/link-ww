@@ -1,4 +1,4 @@
-package link.ww.agent.web;
+package link.ww.base.web;
 
 import link.web.annotation.WrapperWebResult;
 import link.ww.base.service.AuthorizeService;
@@ -25,13 +25,13 @@ public class AuthorizeAction {
   @Autowired
   private AuthorizeService authorizeService;
 
-  @GetMapping("#{agentProperties.auth.requestAuthorizeUri}")
+  @GetMapping("#{wwBaseProperties.auth.requestAuthorizeUri}")
   public String url(String redirectUrl) {
     String state = UUID.randomUUID().toString();
     return authorizeService.getAuthorizeUrl(redirectUrl, state);
   }
 
-  @GetMapping("#{agentProperties.auth.requestWebAuthorizeUri}")
+  @GetMapping("#{wwBaseProperties.auth.requestWebAuthorizeUri}")
   public String webUrl(String redirectUrl) {
     String state = UUID.randomUUID().toString();
     return authorizeService.getWebAuthorizeUrl(redirectUrl, state);

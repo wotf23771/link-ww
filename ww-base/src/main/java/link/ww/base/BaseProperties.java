@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * 企业微信基础配置属性
@@ -14,6 +15,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Slf4j
 @Data
+@Component("wwBaseProperties")
 @ConfigurationProperties(prefix = BaseConstant.CONFIG_PREFIX)
 public class BaseProperties implements InitializingBean {
 
@@ -47,6 +49,24 @@ public class BaseProperties implements InitializingBean {
    * 用于同步企业通讯录数据
    */
   private String contactsSyncAgent;
+
+  private String corpSignatureUri;
+
+  private String agentSignatureUri;
+
+  /**
+   * OAuth2授权配置
+   */
+  private Auth auth;
+
+  @Data
+  public static class Auth {
+
+    private String requestAuthorizeUri;
+
+    private String requestWebAuthorizeUri;
+
+  }
 
   @Override
   public void afterPropertiesSet() throws Exception {
