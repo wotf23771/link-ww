@@ -8,7 +8,11 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 
 /**
- * 指令回调事件
+ * 企业微信指令回调事件
+ * 用于处理企业微信的指令回调消息
+ *
+ * @author wangxiaolei
+ * @since 2025/2/10
  */
 public class CommandCallbackEvent extends ApplicationEvent {
 

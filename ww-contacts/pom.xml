@@ -19,7 +19,19 @@
   <dependencies>
     <dependency>
       <groupId>link</groupId>
-      <artifactId>ww-agent</artifactId>
+      <artifactId>link-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>link</groupId>
+      <artifactId>link-redis-cache-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>link</groupId>
+      <artifactId>link-redisson-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>link</groupId>
+      <artifactId>ww-base</artifactId>
     </dependency>
   </dependencies>
 </project>

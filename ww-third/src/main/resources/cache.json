@@ -16,5 +16,23 @@
     "ttl": 7000,
     "valueSerializer": "json",
     "remark": "第三方应用凭证"
+  },
+  {
+    "name": "ww:third:corp_token",
+    "ttl": 7000,
+    "valueSerializer": "json",
+    "remark": "企业凭证"
+  },
+  {
+    "name": "ww:jsapi_ticket:corp",
+    "ttl": 7000,
+    "valueSerializer": "json",
+    "remark": "企业jsapi_ticket"
+  },
+  {
+    "name": "ww:jsapi_ticket:agent",
+    "ttl": 7000,
+    "valueSerializer": "json",
+    "remark": "应用jsapi_ticket"
   }
 ]

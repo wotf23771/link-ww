@@ -31,7 +31,15 @@
     </dependency>
     <dependency>
       <groupId>link</groupId>
+      <artifactId>link-web-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>link</groupId>
       <artifactId>ww-base</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>link</groupId>
+      <artifactId>ww-contacts</artifactId>
     </dependency>
   </dependencies>
 </project>

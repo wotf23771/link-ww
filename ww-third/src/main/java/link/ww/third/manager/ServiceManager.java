@@ -8,15 +8,24 @@ import org.springframework.util.Assert;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 企业微信第三方应用服务接口管理
+ * 主要用于处理企业微信开放平台的各种凭证获取和授权操作
+ *
+ * @author wangxiaolei
+ * @since 2025/2/10
+ */
 @Service
 public class ServiceManager extends BaseManager {
 
   /**
    * 获取服务商凭证
+   * 该接口用于获取服务商的provider_access_token，服务商在获取企业微信开放平台开发的资源时，需要先获取provider_access_token
+   * 详见：https://developer.work.weixin.qq.com/document/path/91200
    *
-   * @param corpId
-   * @param providerSecret
-   * @return
+   * @param corpId 服务商的corpid
+   * @param providerSecret 服务商的secret，在企业微信服务商管理后台查看
+   * @return {@link GetProviderTokenResponse} 包含provider_access_token和有效期
    */
   public GetProviderTokenResponse getProviderToken(String corpId, String providerSecret) {
     Assert.notNull(corpId, "服务商的corpid不能为空");
@@ -104,6 +113,30 @@ public class ServiceManager extends BaseManager {
     bodyParam.put("permanent_code", permanentCode);
 
     return executePost(uri, queryParam, JsonUtils.toJson(bodyParam), GetAuthInfoResponse.class);
+  }
+
+  /**
+   * 获取企业凭证
+   *
+   * @param suiteAccessToken
+   * @param authCorpId
+   * @param permanentCode
+   * @return
+   */
+  public GetCorpTokenResponse getCorpToken(String suiteAccessToken, String authCorpId, String permanentCode) {
+    Assert.notNull(suiteAccessToken, "SuiteAccessToken不能为空");
+    Assert.notNull(authCorpId, "授权方corpid不能为空");
+    Assert.notNull(permanentCode, "永久授权码不能为空");
+
+    String uri = "/service/get_corp_token";
+    Map<String, Object> queryParam = new HashMap<>();
+    queryParam.put("suite_access_token", suiteAccessToken);
+
+    Map<String, String> bodyParam = new HashMap<>();
+    bodyParam.put("auth_corpid", authCorpId);
+    bodyParam.put("permanent_code", permanentCode);
+
+    return executePost(uri, queryParam, JsonUtils.toJson(bodyParam), GetCorpTokenResponse.class);
   }
 
 }

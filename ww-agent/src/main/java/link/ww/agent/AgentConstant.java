@@ -2,6 +2,12 @@ package link.ww.agent;
 
 import link.common.constant.LinkConstant;
 
+/**
+ * 企业微信应用模块常量定义
+ *
+ * @author wangxiaolei
+ * @since 2025/2/10
+ */
 public class AgentConstant {
 
   public static final String CONFIG_PREFIX = LinkConstant.CONFIG_PREFIX + ".ww.agent";

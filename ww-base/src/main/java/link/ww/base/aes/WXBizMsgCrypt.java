@@ -50,22 +50,6 @@
  * 针对org.apache.commons.codec.binary.Base64，
  * 需要导入架包commons-codec-1.9（或commons-codec-1.8等其他版本）
  * 官方下载地址：http://commons.apache.org/proper/commons-codec/download_codec.cgi
- * <p>
- * 针对org.apache.commons.codec.binary.Base64，
- * 需要导入架包commons-codec-1.9（或commons-codec-1.8等其他版本）
- * 官方下载地址：http://commons.apache.org/proper/commons-codec/download_codec.cgi
- * <p>
- * 针对org.apache.commons.codec.binary.Base64，
- * 需要导入架包commons-codec-1.9（或commons-codec-1.8等其他版本）
- * 官方下载地址：http://commons.apache.org/proper/commons-codec/download_codec.cgi
- * <p>
- * 针对org.apache.commons.codec.binary.Base64，
- * 需要导入架包commons-codec-1.9（或commons-codec-1.8等其他版本）
- * 官方下载地址：http://commons.apache.org/proper/commons-codec/download_codec.cgi
- * <p>
- * 针对org.apache.commons.codec.binary.Base64，
- * 需要导入架包commons-codec-1.9（或commons-codec-1.8等其他版本）
- * 官方下载地址：http://commons.apache.org/proper/commons-codec/download_codec.cgi
  */
 
 // ------------------------------------------------------------------------
@@ -78,7 +62,6 @@
 package link.ww.base.aes;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.binary.Hex;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -88,19 +71,11 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * 提供接收和推送给企业微信消息的加解密接口(UTF8编码的字符串).
- * <ol>
- * 	<li>第三方回复加密消息给企业微信</li>
- * 	<li>第三方收到企业微信发送的消息，验证消息的安全性，并对消息进行解密。</li>
- * </ol>
- * 说明：异常java.security.InvalidKeyException:illegal Key Size的解决方案
- * <ol>
- * 	<li>在官方网站下载JCE无限制权限策略文件（JDK7的下载地址：
- *      http://www.oracle.com/technetwork/java/javase/downloads/jce-7-download-432124.html</li>
- * 	<li>下载后解压，可以看到local_policy.jar和US_export_policy.jar以及readme.txt</li>
- * 	<li>如果安装了JRE，将两个jar文件放到%JRE_HOME%\lib\security目录下覆盖原来的文件</li>
- * 	<li>如果安装了JDK，将两个jar文件放到%JDK_HOME%\jre\lib\security目录下覆盖原来文件</li>
- * </ol>
+ * 企业微信消息加解密工具类
+ * 提供接收和推送给企业微信消息的加解密接口
+ *
+ * @author wangxiaolei
+ * @since 2025/2/10
  */
 public class WXBizMsgCrypt {
 
@@ -130,14 +105,6 @@ public class WXBizMsgCrypt {
     this.token = token;
     this.receiveid = receiveid;
     aesKey = Base64.decodeBase64(encodingAesKey + "=");
-  }
-
-  public static void main(String[] args) {
-    Base64 base64 = new Base64();
-    String key = "iBAnaRN6EimBNgr0oEay6R9FPuVRiP4k9wuYgNTn1Ei";
-    byte[] bytes = Base64.decodeBase64(key + "=");
-    System.out.println(Base64.encodeBase64String(bytes));
-    System.out.println(Hex.encodeHexString(bytes));
   }
 
   // 生成4个字节的网络字节序

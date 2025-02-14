@@ -7,7 +7,7 @@ import lombok.Data;
  * 企业微信接口通用返回值
  *
  * @author wangxiaolei
- * @since 2023/4/27 1:03
+ * @since 2025/2/10
  */
 @Data
 public class BaseResponse {

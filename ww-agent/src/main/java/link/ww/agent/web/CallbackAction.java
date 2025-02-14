@@ -11,6 +11,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 企业微信回调接口
+ * 处理企业微信的回调请求，包括URL验证和数据接收
+ *
+ * @author wangxiaolei
+ * @since 2025/2/10
+ */
 @Slf4j
 @RestController
 @RequestMapping("#{agentProperties.callbackPrefix}")
@@ -27,7 +34,15 @@ public class CallbackAction {
   private BaseProperties baseProperties;
 
   /**
-   * 数据回调，验证
+   * 处理URL验证请求
+   * 验证企业微信回调配置的有效性
+   *
+   * @param agentId 应用ID
+   * @param msg_signature 消息签名
+   * @param timestamp 时间戳
+   * @param nonce 随机串
+   * @param echostr 随机字符串
+   * @return 解密后的echostr
    */
   @GetMapping("/{agentId}")
   public String get(@PathVariable("agentId") String agentId, String msg_signature, String timestamp, String nonce, String echostr) {

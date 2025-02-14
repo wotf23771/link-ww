@@ -5,6 +5,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.Cache;
 import org.springframework.stereotype.Service;
 
+/**
+ * 企业微信应用凭证缓存
+ * 管理应用access_token的缓存
+ *
+ * @author wangxiaolei
+ * @since 2025/2/10
+ */
 @Service
 public class AgentTokenCache {
 
