@@ -62,7 +62,6 @@
 package link.ww.base.aes;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.binary.Hex;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -106,14 +105,6 @@ public class WXBizMsgCrypt {
     this.token = token;
     this.receiveid = receiveid;
     aesKey = Base64.decodeBase64(encodingAesKey + "=");
-  }
-
-  public static void main(String[] args) {
-    Base64 base64 = new Base64();
-    String key = "iBAnaRN6EimBNgr0oEay6R9FPuVRiP4k9wuYgNTn1Ei";
-    byte[] bytes = Base64.decodeBase64(key + "=");
-    System.out.println(Base64.encodeBase64String(bytes));
-    System.out.println(Hex.encodeHexString(bytes));
   }
 
   // 生成4个字节的网络字节序

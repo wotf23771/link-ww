@@ -1,5 +1,6 @@
 package link.ww.msg.audit.web;
 
+import link.common.utils.XmlUtils;
 import link.ww.base.BaseProperties;
 import link.ww.base.aes.AesException;
 import link.ww.base.aes.WXBizMsgCrypt;
@@ -8,15 +9,6 @@ import link.ww.msg.audit.MsgAuditProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.StringReader;
 
 /**
  * 回调通知
@@ -87,52 +79,13 @@ public class CallbackAction {
 //      log.info("post请求的密文：{}", body);
       echoStr = wxcpt.DecryptMsg(msg_signature, timestamp, nonce, body);
       log.info("post请求的明文：{}", echoStr);
-      DocumentBuilder db = getDocumentBuilder();
-      StringReader sr = new StringReader(echoStr);
-      InputSource is = new InputSource(sr);
-      Document document = db.parse(is);
-      Element root = document.getDocumentElement();
-      String infoType = getElementContent(root, "InfoType");
+      String infoType = XmlUtils.getFirstTagContent(echoStr, "InfoType");
+      log.info(infoType);
     } catch (Exception e) {
       e.printStackTrace();
       return ERROR;
     }
     return SUCCESS;
-  }
-
-  private String getElementContent(Element root, String elementName) {
-    if (root == null) {
-      return null;
-    }
-    NodeList infoTypeList = root.getElementsByTagName(elementName);
-    if (infoTypeList.getLength() > 0) {
-      return infoTypeList.item(0).getTextContent();
-    }
-    return null;
-  }
-
-  private String getElementContent(String xml, String elementName) {
-    String content = null;
-    try {
-      DocumentBuilder db = getDocumentBuilder();
-      StringReader sr = new StringReader(xml);
-      InputSource is = new InputSource(sr);
-      Document document = db.parse(is);
-      Element root = document.getDocumentElement();
-      content = getElementContent(root, elementName);
-    } catch (Exception e) {
-      log.error(e.getMessage(), e);
-    }
-    return content;
-  }
-
-  private DocumentBuilder getDocumentBuilder() {
-    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-    try {
-      return dbf.newDocumentBuilder();
-    } catch (ParserConfigurationException e) {
-      throw new RuntimeException(e);
-    }
   }
 
 }
