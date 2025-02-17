@@ -26,13 +26,13 @@ public class CallbackAction {
   private static final String SUCCESS = "success";
 
   @Autowired
-  private AccessTokenService accessTokenService;
-
-  @Autowired
   private BaseProperties baseProperties;
 
   @Autowired
   private MsgAuditProperties msgAuditProperties;
+
+  @Autowired
+  private AccessTokenService accessTokenService;
 
   /**
    * 数据回调，验证

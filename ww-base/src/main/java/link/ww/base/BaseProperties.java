@@ -33,10 +33,11 @@ public class BaseProperties implements InitializingBean {
 
   /**
    * 应用类型
-   * INNER: 自建应用
+   * INTERNAL: 自建应用
    * THIRD: 第三方应用
+   * LOCAL：本地化应用
    */
-  private AgentType agentType;
+  private AppType appType;
 
   /**
    * 默认应用标识
@@ -72,7 +73,7 @@ public class BaseProperties implements InitializingBean {
   public void afterPropertiesSet() throws Exception {
     log.debug("baseUrl:{}", baseUrl);
     log.debug("corpId:{}", corpId);
-    log.debug("agentType:{}", agentType);
+    log.debug("agentType:{}", appType);
     log.debug("defaultAgent:{}", defaultAgent);
     log.debug("contactsSyncAgent:{}", contactsSyncAgent);
   }

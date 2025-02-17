@@ -20,7 +20,7 @@
   <dependencies>
     <dependency>
       <groupId>link</groupId>
-      <artifactId>ww-agent</artifactId>
+      <artifactId>ww-internal</artifactId>
     </dependency>
   </dependencies>
 </project>

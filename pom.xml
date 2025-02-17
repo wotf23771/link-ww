@@ -17,9 +17,10 @@
     <module>example</module>
     <module>ww-base</module>
     <module>ww-msg-audit</module>
-    <module>ww-agent</module>
+    <module>ww-internal</module>
     <module>ww-contacts</module>
     <module>ww-third</module>
+    <module>ww-local</module>
   </modules>
   <properties>
 
@@ -42,7 +43,12 @@
       </dependency>
       <dependency>
         <groupId>link</groupId>
-        <artifactId>ww-agent</artifactId>
+        <artifactId>ww-internal</artifactId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <groupId>link</groupId>
+        <artifactId>ww-local</artifactId>
         <version>${revision}</version>
       </dependency>
       <dependency>

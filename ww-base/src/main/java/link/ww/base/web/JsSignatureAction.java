@@ -53,11 +53,11 @@ public class JsSignatureAction {
    * 构建签名
    *
    * @param ticket jsapi_ticket
-   * @param url 需要签名的URL
+   * @param url    需要签名的URL
    * @return JsSignature 对象，包含时间戳、随机串和签名
    */
   private JsSignature build(String ticket, String url) {
-    String nonceStr = RandomStringUtils.randomAlphanumeric(10); // 生成随机字符串
+    String nonceStr = RandomStringUtils.secure().nextAlphanumeric(10); // 生成随机字符串
     Long timestamp = System.currentTimeMillis() / 1000; // 获取当前时间戳
     StringBuilder strBuild = new StringBuilder();
     strBuild.append("jsapi_ticket=").append(ticket)
