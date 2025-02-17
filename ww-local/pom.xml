@@ -9,18 +9,37 @@
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>ww-msg-audit</artifactId>
+  <artifactId>ww-local</artifactId>
 
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>link</groupId>
-      <artifactId>ww-internal</artifactId>
+      <artifactId>link-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>link</groupId>
+      <artifactId>link-redis-cache-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>link</groupId>
+      <artifactId>link-redisson-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>link</groupId>
+      <artifactId>link-web-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>link</groupId>
+      <artifactId>ww-base</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>link</groupId>
+      <artifactId>ww-contacts</artifactId>
     </dependency>
   </dependencies>
 </project>

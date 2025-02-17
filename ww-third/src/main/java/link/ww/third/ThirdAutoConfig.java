@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGenerator;
 
 @Configuration
-@ConditionalOnProperty(name = "link.ww.base.agent-type", havingValue = "third")
+@ConditionalOnProperty(name = "link.ww.base.app-type", havingValue = "third")
 @MapperScan(basePackages = ThirdConstant.COMPONENT_SCOPE, markerInterface = BaseMapper.class)
 @ComponentScan(value = ThirdConstant.COMPONENT_SCOPE, nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class)
 public class ThirdAutoConfig {
