@@ -21,8 +21,8 @@
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <link.version>3.3.8-20250216</link.version>
-    <revision>1.0.0-20250216</revision>
+    <link.version>3.3.8-20250218</link.version>
+    <revision>1.0.0-20250219</revision>
 
     <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
     <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
