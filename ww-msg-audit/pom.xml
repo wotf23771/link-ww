@@ -6,7 +6,7 @@
   <parent>
     <groupId>link</groupId>
     <artifactId>link-ww</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>${revision}</version>
   </parent>
 
   <artifactId>ww-msg-audit</artifactId>
